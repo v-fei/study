@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,24 +15,28 @@
       height: 100vh;
       margin: 0;
     }
+
     #reader {
       width: 500px;
       max-width: 90%;
       border: 2px solid #f0f0f0;
       border-radius: 8px;
     }
+
     #result {
       margin-top: 20px;
       font-size: 1.2em;
       font-weight: bold;
       color: #333;
     }
+
     a {
       color: #007bff;
       text-decoration: none;
     }
   </style>
 </head>
+
 <body>
 
   <h1>HTML5 QR Code Scanner</h1>
@@ -39,14 +44,15 @@
   <div id="result">Scan result will appear here</div>
 
   <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
   <script>
     function onScanSuccess(decodedText, decodedResult) {
       // Handle the scanned code as you like.
       console.log(`Code matched = ${decodedText}`, decodedResult);
-      
+
       const resultElement = document.getElementById('result');
       resultElement.innerHTML = `Scan successful! Result: <a href="${decodedText}" target="_blank">${decodedText}</a>`;
-      
+
       // Optional: Stop scanning after a successful scan.
       // html5Qrcode.stop().then(ignore => {
       //   // QR Code scanning is stopped.
@@ -62,13 +68,13 @@
 
     document.addEventListener('DOMContentLoaded', (event) => {
       const html5Qrcode = new Html5Qrcode("reader");
-      const config = { 
-        fps: 10, 
+      const config = {
+        fps: 10,
         qrbox: { width: 250, height: 250 },
         // Important: Ask for the back camera.
-        camera: { facingMode: "environment" } 
+        camera: { facingMode: "environment" }
       };
-      
+
       // Start scanning.
       html5Qrcode.start({ facingMode: "environment" }, config, onScanSuccess, onScanFailure)
         .catch(err => {
@@ -79,4 +85,5 @@
   </script>
 
 </body>
+
 </html>
